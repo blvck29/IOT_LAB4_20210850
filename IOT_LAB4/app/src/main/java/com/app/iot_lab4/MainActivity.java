@@ -1,6 +1,9 @@
 package com.app.iot_lab4;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    Button appButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +25,19 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        appButton = findViewById(R.id.app_button);
+        appButton.setOnClickListener(openAppListener);
+
     }
+
+    View.OnClickListener openAppListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(MainActivity.this, AppActivity.class);
+            startActivity(intent);
+        }
+    };
+
 }

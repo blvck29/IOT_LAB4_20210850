@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/optionMenuLigas"
+        android:title="Ligas"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_ligas"/>
+    <item
+        android:id="@+id/optionMenuPosiciones"
+        android:title="Posiciones"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_posiciones"/>
+    <item
+        android:id="@+id/optionMenuResultados"
+        android:title="Resultados"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_resultados"/>
+</menu>

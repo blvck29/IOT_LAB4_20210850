@@ -21,8 +21,6 @@ public class AppActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    private int currentFragmentIndex = 0;
-
     private final Fragment ligasFragment = new LigasFragment();
     private final Fragment posicionesFragment = new PosicionesFragment();
     private final Fragment resultadosFragment = new ResultadosFragment();
@@ -52,35 +50,25 @@ public class AppActivity extends AppCompatActivity {
 
     private boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
-        View topMenuContainer = findViewById(R.id.fragmentContainerApp);
 
         if (item.getItemId() == R.id.optionMenuLigas){
             selectedFragment = ligasFragment;
-            topMenuContainer.setVisibility(View.VISIBLE);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerApp, selectedFragment).commit();
-
-            currentFragmentIndex = 0;
             return true;
         }
 
         if (item.getItemId() == R.id.optionMenuPosiciones){
             selectedFragment = posicionesFragment;
-            topMenuContainer.setVisibility(View.VISIBLE);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerApp, selectedFragment).commit();
-
-            currentFragmentIndex = 1;
             return true;
         }
 
         if (item.getItemId() == R.id.optionMenuResultados){
             selectedFragment = resultadosFragment;
-            topMenuContainer.setVisibility(View.GONE);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerApp, selectedFragment).commit();
-
-            currentFragmentIndex = 2;
             return true;
         }
 

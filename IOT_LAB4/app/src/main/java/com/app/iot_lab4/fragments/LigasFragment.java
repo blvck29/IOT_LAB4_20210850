@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.app.iot_lab4.adapter.LigaAdapter;
 import com.app.iot_lab4.api.ApiClient;
 import com.app.iot_lab4.api.ApiService;
 import com.app.iot_lab4.api.ResponseLigas;
+import com.app.iot_lab4.api.ResponseLigasPorPais;
 import com.app.iot_lab4.model.Liga;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,7 +36,7 @@ public class LigasFragment extends Fragment {
 
     ApiService apiService = ApiClient.getRetrofitInstance().create(ApiService.class);
 
-    private RecyclerView categoryRecycler;
+    private RecyclerView ligasRecycler;
     private LigaAdapter ligasAdapter;
     private ArrayList<Liga> ligas = new ArrayList<>();
 
@@ -56,10 +58,10 @@ public class LigasFragment extends Fragment {
 
         searchButton.setOnClickListener(SearchButtonListener);
 
-        categoryRecycler = view.findViewById(R.id.ligasRecyclerFragment1); // Asegúrate de tener este ID en tu layout
+        ligasRecycler = view.findViewById(R.id.ligasRecyclerFragment1);
         ligasAdapter = new LigaAdapter(ligas);
-        categoryRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        categoryRecycler.setAdapter(ligasAdapter);
+        ligasRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        ligasRecycler.setAdapter(ligasAdapter);
 
         return view;
     }
@@ -72,39 +74,72 @@ public class LigasFragment extends Fragment {
 
             if (inputText.isEmpty()) {
 
-                obtenerLigasGenerales();
+                getLigasGenerales();
 
             } else {
 
-                
+                getLigasPorPais(inputText);
+
             }
         }
     };
 
 
-    private void obtenerLigasGenerales() {
-        ApiService apiService = ApiClient.getRetrofitInstance().create(ApiService.class);
+    private void getLigasGenerales() {
+        ApiClient.getRetrofitInstance().create(ApiService.class);
         Call<ResponseLigas> call = apiService.getAllLeagues();
 
         call.enqueue(new Callback<ResponseLigas>() {
             @Override
             public void onResponse(Call<ResponseLigas> call, Response<ResponseLigas> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful()  && response.body() != null && response.body().getLeagues() != null) {
                     ligas.clear();
                     ligas.addAll(response.body().getLeagues());
                     ligasAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(getContext(), "No se pudieron obtener las ligas", Toast.LENGTH_SHORT).show();
+                    showAlertDialog("Error", "No se pudieron obtener las ligas");
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseLigas> call, Throwable t) {
-                Toast.makeText(getContext(), "Error al obtener las ligas: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                showAlertDialog("Error", "Error al obtener las ligas: " + t.getMessage());
             }
         });
     }
 
+    private void getLigasPorPais(String pais) {
+        ApiClient.getRetrofitInstance().create(ApiService.class);
+        Call<ResponseLigasPorPais> call = apiService.getLeaguesByCountry(pais);
 
+        call.enqueue(new Callback<ResponseLigasPorPais>() {
+            @Override
+            public void onResponse(Call<ResponseLigasPorPais> call, Response<ResponseLigasPorPais> response) {
+                Log.d("API_RESPONSE", "Response Code: " + response.code());
+                Log.d("API_RESPONSE2", "Response Code: " + response.body().getCountries());
+                if (response.isSuccessful() && response.body() != null && response.body().getCountries() != null) {
+                    ligas.clear();
+                    ligas.addAll(response.body().getCountries());
+                    ligasAdapter.notifyDataSetChanged();
+                } else {
+                    showAlertDialog("Error", "No se pudieron obtener las ligas para el país ingresado, intente de nuevo.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLigasPorPais> call, Throwable t) {
+                showAlertDialog("Error", "Error al obtener las ligas: " + t.getMessage());
+            }
+        });
+    }
+
+    private void showAlertDialog(String title, String message) {
+        new MaterialAlertDialogBuilder(getContext())
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
 
 }

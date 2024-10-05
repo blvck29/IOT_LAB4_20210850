@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/mainColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="20dp"
+        android:elevation="4dp"
+        android:background="@color/darkMainColor">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            app:tint="@color/white"
+            android:src="@drawable/logo">
+        </ImageView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:paddingBottom="15dp"
+            android:text="Bienvenido a TELE - FUTBOL">
+        </TextView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:src="@drawable/main_image">
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:textStyle="normal"
+            android:paddingTop="20dp"
+            android:paddingHorizontal="40dp"
+            android:text="Información sobre cualquier liga futbolística del mundo al alcance de tus manos">
+        </TextView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="50dp"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="5dp"
+            android:backgroundTint="#FDFDFD"
+            android:textColor="@color/bolderMainColor"
+            android:textSize="16sp"
+            android:text="ACCEDER" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

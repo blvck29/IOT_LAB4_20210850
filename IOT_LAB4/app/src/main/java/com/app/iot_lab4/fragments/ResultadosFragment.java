@@ -4,6 +4,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +47,8 @@ public class ResultadosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_resultados, container, false);
 
         textInputIdLiga = view.findViewById(R.id.input1_fragment_resultados);
-        textInputTemporada = view.findViewById(R.id.input2_fragment_resultados);
-        textInputRonda = view.findViewById(R.id.input3_fragment_resultados);
+        textInputRonda = view.findViewById(R.id.input2_fragment_resultados);
+        textInputTemporada = view.findViewById(R.id.input3_fragment_resultados);
         searchButton = view.findViewById(R.id.button_fragment_resultados);
 
         resultadosRecycler = view.findViewById(R.id.resultadosRecyclerFragment3);
@@ -63,22 +65,32 @@ public class ResultadosFragment extends Fragment {
         @Override
         public void onClick(View v) {
             String inputTextIdLiga = textInputIdLiga.getText().toString();
-            String inputTextTemporada = textInputTemporada.getText().toString();
             String inputTextRonda = textInputRonda.getText().toString();
+            String inputTextTemporada = textInputTemporada.getText().toString();
+
 
             if (!inputTextIdLiga.isEmpty() && !inputTextTemporada.isEmpty()) {
-                getResultadosByLigaTemporadaRonda(inputTextIdLiga, inputTextTemporada, inputTextRonda);
+                getResultadosByLigaTemporadaRonda(inputTextIdLiga, inputTextRonda, inputTextTemporada);
             } else {
                 showAlertDialog("Error", "Por favor ingrese ID de liga y temporada");
             }
         }
     };
 
-    private void getResultadosByLigaTemporadaRonda(String idLiga, String temporada, String ronda) {
-        Call<ResponseResultados> call = apiService.getResultadosByLigaTemporadaRonda(idLiga, ronda, temporada);
+    private void getResultadosByLigaTemporadaRonda(String idLiga, String ronda, String temporada) {
+
+        Log.d("ID_LIGA", idLiga);
+        Log.d("RONDA", ronda);
+        Log.d("TEMPORADA", temporada);
+
+        Call<ResponseResultados> call = apiService.getResultadosByLigaTemporadaRonda(idLiga,ronda,temporada);
         call.enqueue(new Callback<ResponseResultados>() {
             @Override
             public void onResponse(Call<ResponseResultados> call, Response<ResponseResultados> response) {
+
+                Log.d("API_RESPONSE", "Número de eventos recibidos: " + response.body().getEvents().size());
+                Log.d("API_RESPONSE", "Datos de primer evento: " + response.body().getEvents().get(0).toString());
+
                 if (response.isSuccessful() && response.body() != null && response.body().getEvents() != null) {
                     resultados.clear();
                     resultados.addAll(response.body().getEvents());
@@ -90,6 +102,8 @@ public class ResultadosFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseResultados> call, Throwable t) {
+                Log.e("API_ERROR", "Error en la llamada a la API", t);
+
                 showAlertDialog("Error", "Error al obtener los resultados, el ID introducido, la temporada o la ronda son inválidos.");
             }
         });

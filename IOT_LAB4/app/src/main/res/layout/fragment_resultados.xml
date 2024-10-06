@@ -55,7 +55,7 @@
             android:gravity="center">
 
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputLayout
@@ -71,24 +71,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="100dp"
-                android:paddingLeft="12dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input3_fragment_resultados"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Ronda" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="75dp"
                 android:paddingLeft="12dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -98,6 +81,23 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input2_fragment_resultados"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ronda" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="130dp"
+                android:paddingLeft="12dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input3_fragment_resultados"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Temporada" />

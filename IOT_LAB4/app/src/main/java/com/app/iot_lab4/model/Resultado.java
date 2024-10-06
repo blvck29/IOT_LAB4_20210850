@@ -3,16 +3,16 @@ package com.app.iot_lab4.model;
 public class Resultado {
 
     private String strEvent;
-    private String strdateEvent;
+    private String dateEvent;
     private String strHomeTeam;
     private String strAwayTeam;
     private int intRound;
     private Integer intSpectators;
     private String strThumb;
 
-    public Resultado(String strEvent, String strdateEvent, String strHomeTeam, String strAwayTeam, int intRound, Integer intSpectators, String strThumb) {
+    public Resultado(String strEvent, String dateEvent, String strHomeTeam, String strAwayTeam, int intRound, Integer intSpectators, String strThumb) {
         this.strEvent = strEvent;
-        this.strdateEvent = strdateEvent;
+        this.dateEvent = dateEvent;
         this.strHomeTeam = strHomeTeam;
         this.strAwayTeam = strAwayTeam;
         this.intRound = intRound;
@@ -28,12 +28,12 @@ public class Resultado {
         this.strEvent = strEvent;
     }
 
-    public String getStrdateEvent() {
-        return strdateEvent;
+    public String getDateEvent() {
+        return dateEvent;
     }
 
-    public void setStrdateEvent(String strdateEvent) {
-        this.strdateEvent = strdateEvent;
+    public void setDateEvent(String dateEvent) {
+        this.dateEvent = dateEvent;
     }
 
     public String getStrHomeTeam() {

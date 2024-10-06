@@ -38,21 +38,14 @@ public class ResultadoAdapter extends RecyclerView.Adapter<ResultadoAdapter.Resu
         holder.textViewStrEvent.setText((String.valueOf(resultado.getStrEvent())));
         holder.textViewStrHomeTeam.setText((String.valueOf(resultado.getStrHomeTeam())));
         holder.textViewStrAwayTeam.setText((String.valueOf(resultado.getStrAwayTeam())));
-
-        if (resultado.getIntSpectators() != null) {
-            holder.textViewIntRound.setText((String.valueOf(resultado.getIntRound())));
-        } else {
-            holder.textViewIntRound.setText("Desconocido");
-        }
-
-        holder.textViewDateEvent.setText((String.valueOf(resultado.getStrdateEvent())));
+        holder.textViewIntRound.setText((String.valueOf(resultado.getIntRound())));
+        holder.textViewDateEvent.setText((String.valueOf(resultado.getDateEvent())));
 
         if (resultado.getIntSpectators() != null) {
             holder.textViewIntSpectators.setText((String.valueOf(resultado.getIntSpectators())));
         } else {
-            holder.textViewIntSpectators.setText("Desconocido");
+            holder.textViewIntSpectators.setText("0");
         }
-
 
         Glide.with(holder.itemView.getContext())
                 .load(resultado.getStrThumb()) // URL de la imagen
@@ -85,16 +78,6 @@ public class ResultadoAdapter extends RecyclerView.Adapter<ResultadoAdapter.Resu
             textViewDateEvent = itemView.findViewById(R.id.dateEvent);
             textViewIntSpectators = itemView.findViewById(R.id.intSpectators);
             imageViewStrSquare = itemView.findViewById(R.id.imageViewStrSquare);
-
-            // Log to verify initialization
-            Log.d("ViewHolder", "Initialized ViewHolder with ID: " + getAdapterPosition() +
-                    " strEvent: " + (textViewStrEvent != null) +
-                    ", strHomeTeam: " + (textViewStrHomeTeam != null) +
-                    ", strAwayTeam: " + (textViewStrAwayTeam != null) +
-                    ", intRound: " + (textViewIntRound != null) +
-                    ", dateEvent: " + (textViewDateEvent != null) +
-                    ", intSpectators: " + (textViewIntSpectators != null) +
-                    ", imageViewStrSquare: " + (imageViewStrSquare != null));
         }
     }
 

@@ -19,4 +19,10 @@ public interface ApiService {
 
     @GET("api/v1/json/3/lookuptable.php")
     Call<ResponsePosicionEquipos> getPosicionesByLiga(@Query("l") String idLiga, @Query("s") String temporada);
+
+    @GET("api/v1/json/3/eventsround.php")
+    Call<ResponseResultados> getResultadosByLigaTemporadaRonda(@Query("idLiga") String idLiga,
+                                                               @Query("ronda") String ronda,
+                                                               @Query("temporada") String temporada);
+
 }

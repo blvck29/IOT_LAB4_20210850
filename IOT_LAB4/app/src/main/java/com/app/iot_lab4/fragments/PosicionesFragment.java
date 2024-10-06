@@ -48,7 +48,7 @@ public class PosicionesFragment extends Fragment {
         searchButton = view.findViewById(R.id.button_fragment_posiciones);
 
         posicionesRecycler = view.findViewById(R.id.posicionesRecyclerFragment2);
-        posicionAdapter = new PosicionAdapter(posicionEquipos); // Pasamos la lista vacía al adaptador
+        posicionAdapter = new PosicionAdapter(posicionEquipos);
         posicionesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         posicionesRecycler.setAdapter(posicionAdapter);
 
